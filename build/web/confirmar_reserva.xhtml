@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+    <h:head>
+        <title>Bienvenido</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+   
+
+    <h:body>
+       <center>
+       <center><IMG SRC="resources/images/banner.png" ALT="Logo" ALIGN="center"/></center> 
+       <center><IMG SRC="resources/images/lateral.png" ALT="Logo" ALIGN="left"/></center>
+       <h1>Bienvenido #{manageUsuario.usuario.nombre} #{manageUsuario.usuario.apellido}  </h1>
+       <h3> Ticket número: #{manageReserva.numOrden} </h3>
+       <h3>Habitación seleccionada #{manageReserva.detalle.num_hab} </h3>
+       <h3>Costo por persona: #{manageReserva.detalle.costo} </h3>
+       </center>
+       
+       <center><h3><a href="index.xhtml" >Cerrar Sesión </a></h3></center>
+       <center><h3><a href="index_cliente.xhtml" >Ver habitaciones </a></h3></center>
+       
+        
+        <h:form>
+            <h:panelGrid id = "panel" columns = "2" border = "0" cellpadding = "10" cellspacing = "3">
+            Fecha de llegada:
+            <h:inputText id="txtfecha" label="Fecha de llegada:" value="#{manageReserva.detalle.fecha}" >
+                
+            </h:inputText>
+            
+            Dias de hostadia:
+            <h:inputText id="txtdias" label="Dias:" value="#{manageReserva.reserva.dias}"/><br/>
+            
+            
+            Numero de personas
+            <h:inputText id="txtpersonas" label="numPer:" value="#{manageReserva.detalle.personas}" /><br/> 
+             
+            Servicios adicionales:
+            <h:selectManyCheckbox value="#{manageHabitacion.valores}">
+                <f:selectItems value="#{manageHabitacion.adicional}"/>
+            </h:selectManyCheckbox>
+            <h:commandButton value="Ver costo adicionales: " action="#{manageHabitacion.mostrarAdicionales()}">
+                <f:ajax execute="@form" render="respuesta2"/> 
+                 <h:outputLabel id="respuesta2" value="#{manageHabitacion.precioAdicional}"/>
+            </h:commandButton>    
+       
+            <h:commandButton value="Valor total" action="#{manageReserva.valorTotal(manageReserva.detalle.costo,manageHabitacion.precioAdicional)}">
+                <f:ajax execute="@form" render="respuesta3"/>
+                <h:outputLabel id="respuesta3" value="Subtotal: #{manageReserva.reserva.subtotal} -- Iva 12%: #{manageReserva.reserva.iva} -- Total: #{manageReserva.reserva.total} "/>
+                  
+            </h:commandButton>
+         
+             <h:commandButton 
+              
+           action="#{manageReserva.ingresarOrden(manageReserva.detalle.num_hab, manageReserva.numOrden,manageReserva.detalle.tipo_hab ,manageUsuario.usuario.cedula ,manageReserva.detalle.fecha , manageReserva.reserva.subtotal, manageReserva.reserva.iva, manageReserva.reserva.total , manageHabitacion.valores)}" 
+                        
+       value="Confirmar Reservación">
+             </h:commandButton>
+       </h:panelGrid>
+        </h:form>
+        
+    </h:body>
+</html>
+

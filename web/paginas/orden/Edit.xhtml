@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenEditDlg" widgetVar="OrdenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOrdenTitle}">
+            <h:form id="OrdenEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_idOrden}" for="idOrden" />
+                        <p:inputText id="idOrden" value="#{ordenController.selected.idOrden}" title="#{bundle.EditOrdenTitle_idOrden}" required="true" requiredMessage="#{bundle.EditOrdenRequiredMessage_idOrden}"/>
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{ordenController.selected.fecha}" title="#{bundle.EditOrdenTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_subtotal}" for="subtotal" />
+                        <p:inputText id="subtotal" value="#{ordenController.selected.subtotal}" title="#{bundle.EditOrdenTitle_subtotal}" />
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_iva}" for="iva" />
+                        <p:inputText id="iva" value="#{ordenController.selected.iva}" title="#{bundle.EditOrdenTitle_iva}" />
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{ordenController.selected.total}" title="#{bundle.EditOrdenTitle_total}" />
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_formaPago}" for="formaPago" />
+                        <p:inputText id="formaPago" value="#{ordenController.selected.formaPago}" title="#{bundle.EditOrdenTitle_formaPago}" />
+                        <p:outputLabel value="#{bundle.EditOrdenLabel_cedula}" for="cedula" />
+                        <p:selectOneMenu id="cedula" value="#{ordenController.selected.cedula}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="cedulaItem"
+                                           itemValue="#{cedulaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenController.update}" value="#{bundle.Save}" update="display,:OrdenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OrdenEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrdenEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

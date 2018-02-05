@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HabitacionViewDlg" widgetVar="HabitacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewHabitacionTitle}">
+            <h:form id="HabitacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{habitacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewHabitacionLabel_numHab}"/>
+                        <h:outputText value="#{habitacionController.selected.numHab}" title="#{bundle.ViewHabitacionTitle_numHab}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionLabel_informacionHab}"/>
+                        <h:outputText value="#{habitacionController.selected.informacionHab}" title="#{bundle.ViewHabitacionTitle_informacionHab}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionLabel_estado}"/>
+                        <h:outputText value="#{habitacionController.selected.estado}" title="#{bundle.ViewHabitacionTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionLabel_fotoPath}"/>
+                        <h:outputText value="#{habitacionController.selected.fotoPath}" title="#{bundle.ViewHabitacionTitle_fotoPath}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionLabel_idTipo}"/>
+                        <h:outputText value="#{habitacionController.selected.idTipo}" title="#{bundle.ViewHabitacionTitle_idTipo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="HabitacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

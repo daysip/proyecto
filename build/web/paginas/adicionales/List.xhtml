@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAdicionalesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAdicionalesEmpty}" rendered="#{adicionalesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{adicionalesController.items.rowCount > 0}">
+                    <h:outputText value="#{adicionalesController.pagination.pageFirstItem + 1}..#{adicionalesController.pagination.pageLastItem + 1}/#{adicionalesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{adicionalesController.previous}" value="#{bundle.Previous} #{adicionalesController.pagination.pageSize}" rendered="#{adicionalesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{adicionalesController.next}" value="#{bundle.Next} #{adicionalesController.pagination.pageSize}" rendered="#{adicionalesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{adicionalesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdicionalesTitle_idAdi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAdi}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdicionalesTitle_nombreAdi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreAdi}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdicionalesTitle_precioAdi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precioAdi}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{adicionalesController.prepareView}" value="#{bundle.ListAdicionalesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{adicionalesController.prepareEdit}" value="#{bundle.ListAdicionalesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{adicionalesController.destroy}" value="#{bundle.ListAdicionalesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{adicionalesController.prepareCreate}" value="#{bundle.ListAdicionalesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAdicionalesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

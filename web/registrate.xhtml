@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Registrate</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    
+    <h:body>  
+       <center><IMG SRC="resources/images/banner.png" ALT="Logo" ALIGN="center"/></center> 
+       <center><IMG SRC="resources/images/lateral.png" ALT="Logo" ALIGN="left"/></center>
+    
+       
+       <center><h3><a href="index.xhtml" >Home</a></h3></center>
+       
+       #{manageUsuario.llenarNueva()}
+      
+       <h:form>
+           <h:dataTable value="#{manageUsuario.listaNuevo}" var="nuevo">
+            <h:column>
+            <f:facet name="header">
+                <h:outputText value="cedula"  >
+                   
+                </h:outputText>
+         </f:facet>
+                <h:inputText value="#{nuevo.cedula}" label="#{nuevo.cedula}" >
+                 <f:validateLongRange maximum="99999999999"></f:validateLongRange>
+                </h:inputText>
+            </h:column>
+            <h:column>
+         <f:facet name="header">
+            <h:outputText value="Nombres"></h:outputText>
+         </f:facet>
+          <h:inputText value="#{nuevo.nombre}" label="#{nuevo.nombre}"></h:inputText>
+      </h:column>
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Apellidos"></h:outputText>
+         </f:facet>
+          <h:inputText value="#{nuevo.apellido}" label="#{nuevo.apellido}"></h:inputText>
+      </h:column>
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Correo electrónico"></h:outputText>
+         </f:facet>
+          <h:inputText value="#{nuevo.correo}" label="#{nuevo.correo}"></h:inputText>
+      </h:column>
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Clave"></h:outputText>
+         </f:facet>
+          <h:inputText value="#{nuevo.pass}" label="#{nuevo.pass}"></h:inputText>
+      </h:column>  
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Telefono"></h:outputText>
+         </f:facet>
+            <h:inputText value="#{nuevo.telefono}" label="#{nuevo.telefono}"></h:inputText>
+      </h:column>
+      <h:column>
+          <h:commandButton action="#{manageUsuario.respuestaIngresar(nuevo.cedula, nuevo.nombre, nuevo.apellido, nuevo.correo, nuevo.pass, nuevo.telefono) }" 
+                           value="Registrar">
+          </h:commandButton>
+      </h:column>  
+   </h:dataTable>
+    </h:form>
+       <center><H2> Despues de insertar tus datos, inicia sesión en la pantalla principal </H2></center>
+    </h:body>
+</html>
+
+

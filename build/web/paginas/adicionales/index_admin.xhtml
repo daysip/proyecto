@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Bienvenido Admin</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <center><IMG SRC="paginas/adicionales/banner.png" ALT="Logo" ALIGN="center"/></center>
+
+        <center><h2>Bienvenido Administrador</h2>
+        <h3>Seleccione una tabla para editar datos</h3>
+ <br />
+        <h:link outcome="/adicionales/List" value="Adicionales"/>
+        <br />
+        <h:link outcome="/detalle/List" value="Detalle"/>
+        <br />
+        <h:link outcome="/habitacion/List" value="Habitacion"/>
+        <br />
+        <h:link outcome="/orden/List" value="Orden"/>
+        <br />
+        <h:link outcome="/persona/List" value="Persona"/>
+        <br />
+        <h:link outcome="/rol/List" value="Rol"/>
+        <br />
+        <h:link outcome="/tipoHab/List" value="TipoHab"/>
+        <br />
+        <h:link outcome="/index" value="#{bundle.CreateHabitacionIndexLink}"/>
+        </center>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoHabCreateDlg" widgetVar="TipoHabCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoHabTitle}">
+            <h:form id="TipoHabCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoHabController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipoHabLabel_idTipo}" for="idTipo" />
+                        <p:inputText id="idTipo" value="#{tipoHabController.selected.idTipo}" title="#{bundle.CreateTipoHabTitle_idTipo}" required="true" requiredMessage="#{bundle.CreateTipoHabRequiredMessage_idTipo}"/>
+                        <p:outputLabel value="#{bundle.CreateTipoHabLabel_precioTipo}" for="precioTipo" />
+                        <p:inputText id="precioTipo" value="#{tipoHabController.selected.precioTipo}" title="#{bundle.CreateTipoHabTitle_precioTipo}" />
+                        <p:outputLabel value="#{bundle.CreateTipoHabLabel_nombreTipo}" for="nombreTipo" />
+                        <p:inputText id="nombreTipo" value="#{tipoHabController.selected.nombreTipo}" title="#{bundle.CreateTipoHabTitle_nombreTipo}" />
+                        <p:outputLabel value="#{bundle.CreateTipoHabLabel_personasTipo}" for="personasTipo" />
+                        <p:inputText id="personasTipo" value="#{tipoHabController.selected.personasTipo}" title="#{bundle.CreateTipoHabTitle_personasTipo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoHabController.create}" value="#{bundle.Save}" update="display,:TipoHabListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoHabCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoHabCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
